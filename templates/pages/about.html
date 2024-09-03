@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<h1>about.html</h1>
+{% load static %} 
 <section id="showcase-inner" class="py-5 text-white">
     <div class="container">
       <div class="row text-center">
@@ -20,7 +20,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <a href="index.html"> <i class="fas fa-home"></i> Home</a>
+            <a href={% url "index" %}><i class="fas fa-home"></i> Home</a>
           </li>
           <li class="breadcrumb-item active">About</li>
         </ol>
@@ -37,7 +37,7 @@
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt,
             pariatur!
           </p>
-          <img src="assets/img/about.jpg" alt="" />
+          <img src={% static "/img/about.jpg" %} alt="" />
           <p class="mt-4">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Perspiciatis esse officia repudiandae ad saepe ex, amet neque quod
@@ -83,51 +83,88 @@
   <!-- Team -->
   <section id="team" class="py-5">
     <div class="container">
-      <h2 class="text-center">Our Team</h2>
-      <div class="row text-center">
-        <div class="col-md-4">
-          <img
-            src="assets/img/realtors/kyle.jpg"
-            alt=""
-            class="rounded-circle mb-3"
-          />
-          <h4>Kyle Chan</h4>
-          <p class="text-success">
-            <i class="fas fa-award text-success mb-3"></i> Realtor
-          </p>
-          <hr />
-          <p><i class="fas fa-phone"></i> (852)-555-5555</p>
-          <p><i class="fas fa-envelope-open"></i> kyle@bcrealestate.co</p>
-        </div>
+        <h2 class="text-center">Our Team</h2>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <img
+                    src="assets/img/realtors/kyle.jpg"
+                    alt=""
+                    class="rounded-circle mb-3"
+                />
+                <h4>Kyle Chan</h4>
+                <p class="text-success">
+                    <i class="fas fa-award text-success mb-3"></i> Realtor
+                </p>
+                <hr />
+                <p>
+                    <a href="tel:+85255555555" class="link">
+                        <i class="fas fa-phone"></i> (852)-555-5555
+                    </a>
+                </p>
+                <p>
+                    <a href="mailto:kyle@bcrealestate.co" class="link">
+                        <i class="fas fa-envelope-open"></i> kyle@bcrealestate.co
+                    </a>
+                </p>
+            </div>
 
-        <div class="col-md-4">
-          <img
-            src="assets/img/realtors/mark.jpg"
-            alt=""
-            class="rounded-circle mb-3"
-          />
-          <h4>Mark Lee</h4>
-          <p class="text-success">Realtor</p>
-          <hr />
-          <p><i class="fas fa-phone"></i> (852)-444-4444</p>
-          <p><i class="fas fa-envelope-open"></i> mark@bcrealestate.co</p>
-        </div>
+            <div class="col-md-4">
+                <img
+                    src="assets/img/realtors/mark.jpg"
+                    alt=""
+                    class="rounded-circle mb-3"
+                />
+                <h4>Mark Lee</h4>
+                <p class="text-success">Realtor</p>
+                <hr />
+                <p>
+                    <a href="tel:+85244444444" class="link">
+                        <i class="fas fa-phone"></i> (852)-444-4444
+                    </a>
+                </p>
+                <p>
+                    <a href="mailto:mark@bcrealestate.co" class="link">
+                        <i class="fas fa-envelope-open"></i> mark@bcrealestate.co
+                    </a>
+                </p>
+            </div>
 
-        <div class="col-md-4">
-          <img
-            src="assets/img/realtors/jenny.jpg"
-            alt=""
-            class="rounded-circle mb-3"
-          />
-          <h4>Jenny Cheung</h4>
-          <p class="text-success">Realtor</p>
-          <hr />
-          <p><i class="fas fa-phone"></i> (852)-333-3333</p>
-          <p><i class="fas fa-envelope-open"></i> jenny@bcrealestate.co</p>
+            <div class="col-md-4">
+                <img
+                    src="assets/img/realtors/jenny.jpg"
+                    alt=""
+                    class="rounded-circle mb-3"
+                />
+                <h4>Jenny Cheung</h4>
+                <p class="text-success">Realtor</p>
+                <hr />
+                <p>
+                    <a href="tel:+85233333333" class="link">
+                        <i class="fas fa-phone"></i> (852)-333-3333
+                    </a>
+                </p>
+                <p>
+                    <a href="mailto:jenny@bcrealestate.co" class="link">
+                        <i class="fas fa-envelope-open"></i> jenny@bcrealestate.co
+                    </a>
+                </p>
+            </div>
         </div>
-      </div>
     </div>
-  </section>
+
+    <style>
+        .link {
+            text-decoration: none; /* 默认不显示下划线 */
+            color: inherit; /* 继承父元素的颜色 */
+        }
+
+        .link:hover {
+            text-decoration: underline; /* 悬停时显示下划线 */
+        }
+    </style>
+</section>
+
+
 
 
 {% endblock %}
