@@ -27,5 +27,5 @@ class Listing(models.Model):
     photo_5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True) 
     photo_6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     
-    def str(self):
+    def __str__(self):
         return self.title

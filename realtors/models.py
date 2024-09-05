@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+
 # Create your models here.
 
 class Realtor(models.Model):
@@ -9,7 +10,7 @@ class Realtor(models.Model):
     phone = models.CharField(max_length=20)
     email = models.CharField(max_length=50)
     is_mvp = models.BooleanField(default=False)
-    hire_date = models.DateField(default=datetime.now, blank=True)
+    hire_date = models.DateTimeField(default=datetime.now, blank=True)
     
-    def str(self):
+    def __str__(self):
         return self.name
