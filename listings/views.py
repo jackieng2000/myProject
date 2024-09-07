@@ -8,17 +8,19 @@ def index(request):
     #return HttpResponse("<h1>Hello World</h1>")
     
     # ! get all data from listing database 
-    listings = Listing.objects.all()
+    listings = Listing.objects.all().values()
+
+
+    #for listing in listings:
+    #   d = clisting['list_date']
+    #   diff_day = (datetime.now().date() - d.date())
+    #    clisting['day_ago'] = diff_day.days
+
     # ! pass database records into listings context
-    today = datetime.now()
-   
-    
-    context ={'listings':listings, 'today':today}
+    context ={'listings':listings, }
 
     # !Calculate the start and end of the last day
     
-
-
     return render(request, 'listings/listings.html', context)
 
 def listing(request):

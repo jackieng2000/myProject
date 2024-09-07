@@ -1,10 +1,10 @@
 {% extends 'base.html' %} {% block content %}
-<h1>listings.html</h1>
+{% load humanize %}
 <section id="showcase-inner" class="py-5 text-white">
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <h1 class="display-4">Brower Properity</h1>
+          <h1 class="display-4">Browse Our Properties</h1>
           <p class="lead">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt,
             pariatur!
@@ -20,8 +20,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-
-            <a href={% url "index" %}> <i class="fas fa-home"></i> Home</a>
+            <a href={% url "index" %}><i class="fas fa-home"></i> Home</a>
           </li>
           <li class="breadcrumb-item active">Browse Listings</li>
         </ol>
@@ -34,8 +33,8 @@
     <div class="container">
       <div class="row">
         <!-- Listing 1 -->
-         {% if listings %}
-         {% for listing in listings %}
+        {% if listings %}
+        {% for listing in listings %}
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="card listing-preview">
             <img
@@ -43,10 +42,11 @@
               src={{listing.photo_main.url}}
               alt=""
             />
+            <p>{{ listing.photo_main.url }} abc</p>
             <div class="card-img-overlay">
               <h2>
                 <span class="badge badge-secondary text-white"
-                  >HKD {{listing.price}}</span
+                  >${{listing.price|intcomma}}</span
                 >
               </h2>
             </div>
@@ -60,7 +60,7 @@
               <hr />
               <div class="row py-2 text-secondary">
                 <div class="col-6">
-                  <i class="fas fa-th-large"></i> Sqft: {{listing.sqft}}
+                  <i class="fas fa-th-large"></i> Sqft: {{listing.sqft|intcomma}}
                 </div>
                 <div class="col-6">
                   <i class="fas fa-dumbbell"></i> ClubHouse: {{listing.clubhouse}}
@@ -68,12 +68,12 @@
               </div>
               <div class="row py-2 text-secondary">
                 <div class="col-6">
-                  <i class="fas fa-bed"></i> bedroom:{{listing.bedroom}}
+                  <i class="fas fa-bed"></i> Bedrooms: {{listing.bedrooms}}
                 </div>
                 <div class="col-6">
-                  <i class="fas fa-bath"></i> Bathrooms: {{listing.bathroom}}
+                  <i class="fas fa-bath"></i> Bathrooms: {{listing.bathroom}}                           
                 </div>
-              </div>
+              </div>           
               <hr />
               <div class="row py-2 text-secondary">
                 <div class="col-12">
@@ -81,14 +81,34 @@
                 </div>
               </div>
               <div class="row text-secondary pb-2">
-                <div class="col-6">
-                  <i class="fas fa-clock"></i>{{ listing.list_date }}
-                
-                  days ago
+                <div class="col-6"> fa-dolly-flatbed    "</i>
+                  {{ listing.day_ago }} aago
+
+                  {% with time_since=listing.list_date|timesince %}
+                  {% if "day" in time_since %}
+                  {% if time_since|slice:":1" == "1" %}1 day ago
+                  {% else %}
+                  {{ time_since|slice:":6" }} ago
+                  {% endif %}
+                  {% elif "hour" in time_since %}
+                  {% if time_since|slice:":1" == "1" %}1 hour ago
+                  {% else %}
+                  {{ time_since|slice:":7" }} ago
+                  {% endif %}
+                  {% elif "minute" in time_since %}
+                  {% if time_since|slice:":1" == "1" %}1 minute ago
+                  {% elif time_since|slice:":1" == "0" %}Just now
+                  {% else %}
+                  {{ time_since|slice:":10" }} ago
+                  {% endif %}
+                  {% else %}
+                  {{ time_since|slice:":3" }}ago
+                  {% endif %}
+                  {% endwith %}
                 </div>
               </div>
               <hr />
-              <a href={% url "listings" %} class="btn btn-primary btn-block"
+              <a href="listing.html" class="btn btn-primary btn-block"
                 >More Info</a
               >
             </div>
@@ -96,11 +116,11 @@
         </div>
         {% endfor %}
         {% else %}
-        <div class "col-md-12">
-        <p>No listing Available</p>
-          <div>
-        {% endif %}
-        
+        <div class="col-md-12">
+        <p>No Listing Available</p>
+      </div>
+      {% endif %}
+
       </div>
 
       <div class="row">
@@ -126,6 +146,4 @@
       </div>
     </div>
   </section>
-
-
 {% endblock %}
